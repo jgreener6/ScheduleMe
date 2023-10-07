@@ -3,16 +3,28 @@ import { Form, Input, Button, Select } from 'antd';
 
 const { Option } = Select;
 
-function JobPostingForm() {
-  const onFinish = (values) => {
-    console.log('Form values:', values);
-    // Handle form submission here
+interface JobDetails {
+  title: string;
+  // Add more fields here
+}
+
+interface JobPostingFormProps {
+  onFinish: (values: JobDetails) => void;
+}
+
+const JobPostingForm: React.FC<JobPostingFormProps> = ({ onFinish }) => {
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
   };
 
   return (
     <div>
       <h2>Post a Job</h2>
-      <Form onFinish={onFinish}>
+      <Form
+        name="jobPosting"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
         <Form.Item
           label="Job Title"
           name="title"
@@ -29,6 +41,6 @@ function JobPostingForm() {
       </Form>
     </div>
   );
-}
+};
 
 export default JobPostingForm;

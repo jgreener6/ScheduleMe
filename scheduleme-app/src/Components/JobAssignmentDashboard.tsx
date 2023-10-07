@@ -1,0 +1,2 @@
+// emptyModule.ts
+export default {};
