@@ -23,8 +23,8 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
       return {
         key,
         icon: React.createElement(icon),
-        label: `subnav ${key}`,
-        children: new Array(4).fill(null).map((_, j) => {
+        label: `Calender ${key}`,
+        children: new Array(3).fill(null).map((_, j) => {
           const subKey = index * 4 + j + 1;
           return {
             key: subKey.toString(),
