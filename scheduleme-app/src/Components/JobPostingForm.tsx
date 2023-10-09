@@ -1,45 +1,70 @@
-import React from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import React, { useState } from 'react';
+import { Form, Input, InputNumber, Button, Radio, Select, DatePicker } from 'antd';
 
-const { Option } = Select;
+const { TextArea } = Input;
 
-interface JobDetails {
-  title: string;
-  // Add more fields here
-}
+const JobPostingForm: React.FC = () => {
+  const [form] = Form.useForm();
 
-interface JobPostingFormProps {
-  onFinish: (values: JobDetails) => void;
-}
-
-const JobPostingForm: React.FC<JobPostingFormProps> = ({ onFinish }) => {
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+  const onFinish = (values: any) => {
+    console.log('Received values:', values);
+    // Add logic to handle form submission here
   };
 
   return (
-    <div>
-      <h2>Post a Job</h2>
-      <Form
-        name="jobPosting"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <Form.Item
-          label="Job Title"
-          name="title"
-          rules={[{ required: true, message: 'Please enter a job title!' }]}
-        >
-          <Input />
-        </Form.Item>
-        {/* Add more Form.Item components for other fields */}
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Post Job
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+    <Form
+      form={form}
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 14 }}
+      layout="horizontal"
+      onFinish={onFinish}
+      style={{ maxWidth: 600 }}
+    >
+      <Form.Item label="Job Type" name="jobType" rules={[{ required: true, message: 'Please input the Job Type!' }]}>
+      <Select>
+          <Select.Option value="Wedding">Wedding</Select.Option>
+          <Select.Option value="Engagment">Engagement</Select.Option>
+         
+        </Select>
+      </Form.Item>
+      <Form.Item label="Position" name="position" rules={[{ required: true, message: 'Please input the Position!' }]}>
+      <Select>
+          <Select.Option value="Videographer">Videographer</Select.Option>
+          <Select.Option value="Photographer">Photographer</Select.Option>
+          <Select.Option value="DJ">DJ</Select.Option>
+          <Select.Option value="PhotoBooth">PhotoBooth</Select.Option>
+        </Select>
+      </Form.Item>
+      <Form.Item label="Location" name="location" rules={[{ required: true, message: 'Please input the Location!' }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label="Hours" name="hours" rules={[{ required: true, message: 'Please input the Hours!' }]}>
+        <InputNumber />
+      </Form.Item>
+      <Form.Item label="Pay" name="pay" rules={[{ required: true, message: 'Please input the Pay!' }]}>
+        <InputNumber />
+      </Form.Item>
+      <Form.Item label="Date" name="date" rules={[{ required: true, message: 'Please select a Date!' }]}>
+        <DatePicker />
+      </Form.Item>
+      <Form.Item label="Description" name="description">
+        <TextArea rows={4} />
+      </Form.Item>
+      
+      <Form.Item label="Category" name="category">
+        <Select>
+          <Select.Option value="Lead">Lead</Select.Option>
+          <Select.Option value="Second-Shooter">Second Shooter</Select.Option>
+          <Select.Option value="contract">Contract</Select.Option>
+          <Select.Option value="freelance">Freelance</Select.Option>
+        </Select>
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 4, span: 14 }}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 
