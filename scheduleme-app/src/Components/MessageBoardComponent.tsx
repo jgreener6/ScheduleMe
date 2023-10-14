@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
-import { Comment, Avatar, Form, Button, List, Input } from 'antd';
-import moment from 'moment';
+import { List, Input, Button } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import CommentComponent from './CommentComponent'; // Import your custom CommentComponent
 
 const { TextArea } = Input;
 
-const MessageBoard: React.FC = () => {
-  const [comments, setComments] = useState([]);
-  const [value, setValue] = useState('');
+type CommentType = {
+  author: string;
+  content: string;
+  datetime: string;
+};
+
+const MessageBoardComponent: React.FC = () => {
+  const [comments, setComments] = useState<CommentType[]>([]);
+  const [value, setValue] = useState<string>('');
 
   const handleSubmit = () => {
     if (!value) {
       return;
     }
 
-    setComments([
-      ...comments,
-      {
-        author: 'User',
-        content: <p>{value}</p>,
-        datetime: moment().fromNow(),
-      },
-    ]);
+    const newComment: CommentType = {
+      author: 'User',
+      content: value,
+      datetime: new Date().toLocaleString(),
+    };
 
+    setComments((prevComments) => [...prevComments, newComment]);
     setValue('');
   };
 
@@ -32,9 +37,9 @@ const MessageBoard: React.FC = () => {
         header={`${comments.length} messages`}
         itemLayout="horizontal"
         dataSource={comments}
-        renderItem={(item) => (
-          <li>
-            <Comment
+        renderItem={(item, index) => (
+          <li key={index}>
+            <CommentComponent // Use your custom CommentComponent here
               author={item.author}
               content={item.content}
               datetime={item.datetime}
@@ -42,16 +47,12 @@ const MessageBoard: React.FC = () => {
           </li>
         )}
       />
-      <Form.Item>
-        <TextArea rows={4} onChange={(e) => setValue(e.target.value)} value={value} />
-      </Form.Item>
-      <Form.Item>
-        <Button htmlType="submit" onClick={handleSubmit} type="primary">
-          Add Comment
-        </Button>
-      </Form.Item>
+      <TextArea rows={4} onChange={(e) => setValue(e.target.value)} value={value} />
+      <Button type="primary" onClick={handleSubmit}>
+        Add Comment
+      </Button>
     </div>
   );
 };
 
-export default MessageBoard;
+export default MessageBoardComponent;

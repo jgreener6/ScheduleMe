@@ -4,6 +4,8 @@ import './App.css';
 import NavigationMenu from './Components/NavigationMenu';
 import CalendarComponent from './Components/Calendar'; // Import your calendar component
 import JobPostingForm from './Components/JobPostingForm'; // Import the JobPostingForm component
+import MessageBoardComponent from './Components/MessageBoardComponent'; // Import your MessageBoardComponent
+
 
 const { Header, Content } = Layout;
 
@@ -45,6 +47,7 @@ const App: React.FC = () => {
         <Layout style={{ padding: '0 24px 24px' }}>
           {selectedComponent === 'calendar' && <CalendarComponent />}
           {selectedComponent === 'newJob' && <JobPostingForm />} {/* Render JobPostingForm */}
+          {selectedComponent === 'messageBoard' && <MessageBoardComponent />} {/* Render MessageBoardComponent */}
           {/* Add other components based on the selected menu option */}
         </Layout>
       </Layout>
