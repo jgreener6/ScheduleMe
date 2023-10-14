@@ -30,6 +30,8 @@ const MessageBoardComponent: React.FC = () => {
     setValue('');
   };
 
+  
+
   return (
     <div>
       <List

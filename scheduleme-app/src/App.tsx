@@ -24,9 +24,11 @@ const App: React.FC = () => {
       setSelectedComponent('calendar');
     } else if (selectedKeys.includes('newJob')) {
       setSelectedComponent('newJob');
-    } else {
-      setSelectedComponent(null); // Handle other menu options here
+    } else {selectedKeys.includes('messageBoard')
+      setSelectedComponent('messageBoard'); // Handle other menu options here
     }
+    console.log('selectedComponent:', selectedComponent);
+
   };
 
   const handleShowJobPostingForm = () => {
