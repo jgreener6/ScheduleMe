@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-server": "cd server && nodemon index.ts",
+    "start-app": "react-scripts start",
+    "start": "concurrently \"npm run start-server\" \"npm run start-app\""
+    
   },
   "keywords": [],
   "author": "",
