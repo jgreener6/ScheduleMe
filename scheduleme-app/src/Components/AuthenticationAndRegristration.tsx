@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+type UserData = {
+    username: string;
+    password: string;
+    email?: string;  // email might be optional and only needed for registration
+  }
+  
+
 const registerUser = async (userData) => {
   try {
     const response = await axios.post('/auth/register', userData);
