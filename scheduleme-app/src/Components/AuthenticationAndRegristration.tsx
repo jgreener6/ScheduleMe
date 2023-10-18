@@ -7,23 +7,22 @@ type UserData = {
   }
   
 
-const registerUser = async (userData) => {
-  try {
-    const response = await axios.post('/auth/register', userData);
-    console.log(response.data);
-    // Handle success, maybe redirect user or show a message
-  } catch (error) {
-    console.error('Error registering user:', error);
-    // Handle error, maybe show an error message to the user
+  const registerUser = async (userData: UserData) => {
+    try {
+      const response = await axios.post('/auth/register', userData);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
   }
-}
-const loginUser = async (userData) => {
+  
+  const loginUser = async (userData: UserData) => {
     try {
       const response = await axios.post('/auth/login', userData);
       const { token } = response.data;
-      // Store the token, maybe in React state, localStorage, or Context
+      // Do something with the token...
     } catch (error) {
-      console.error('Error logging in:', error);
+      console.error("Error logging in:", error);
     }
   }
   
