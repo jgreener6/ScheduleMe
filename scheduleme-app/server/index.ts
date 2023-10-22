@@ -1,22 +1,30 @@
-import express from 'express';
+
 import authRoutes from './auth';
+import 'reflect-metadata';
+import express from 'express';
 import cors from 'cors';
+import bodyParser from 'body-parser';
+import { createConnection } from 'typeorm';
 
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 
 app.use('/auth', authRoutes);
-app.use(cors({
-    origin: 'http://localhost:3000'
-}));
-app.use(express.json()); // to be able to access req.body
 
 
-app.get('/', (req, res) => {
-    res.send('Hello from the server!');
-});
+createConnection().then(() => {
+    const app = express();
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+    app.use(cors());
+    app.use(bodyParser.json());
+
+    app.get('/', (req, res) => {
+      res.send('Server is up and running');
+    });
+
+    const PORT = 4000;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+}).catch(error => console.log(error));
