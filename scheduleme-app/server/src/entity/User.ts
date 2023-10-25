@@ -8,14 +8,14 @@ import {
 export class User {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column()
-    username: string;
+    username!: string;
 
     @Column()
-    password: string;
+    password!: string;
 
     @Column()
-    email: string;
+    email!: string;
 }
